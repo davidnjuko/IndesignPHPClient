@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<phpunit bootstrap="./bootstrap.php"
+    backupGlobals="true"
+    colors="true" 
+    convertErrorsToExceptions="true" 
+    convertNoticesToExceptions="true" 
+    convertWarningsToExceptions="true" 
+    processIsolation="false" 
+    syntaxCheck="true" 
+    verbose="true" 
+    strict="true"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false">
+    <testsuite name="IndesignClient test suite">
+        <directory suffix="Test.php">./IndesignClient</directory>
+    </testsuite>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src/IndesignClient</directory>
+        </whitelist>
+    </filter>
+</phpunit> 
