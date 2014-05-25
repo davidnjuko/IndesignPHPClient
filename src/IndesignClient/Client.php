@@ -1,6 +1,7 @@
 <?php
 
 namespace IndesignClient;
+use IndesignClient\Exception\ApiCallException;
 
 /**
  * Client
@@ -16,6 +17,9 @@ class Client extends \SoapClient {
 
     private $port = '12345';
     private $ip = '127.0.0.1';
+
+    /** @var \IndesignClient\Application $application */
+    private $application = null;
 
     function __construct($wsdl = 'http://127.0.0.1:12345/service?wsdl')
     {
@@ -35,6 +39,7 @@ class Client extends \SoapClient {
     /**
      * Call main function of Indesign Server API
      * @param array $scriptParameters
+     * @return array
      */
     function doRunScript(array $scriptParameters)
     {
@@ -43,20 +48,42 @@ class Client extends \SoapClient {
         }
 
         if ($this->validScriptParameters($scriptParameters)) {
-            $this->RunScript(array("runScriptParameters" => $scriptParameters));
+            $return = $this->RunScript(array("runScriptParameters" => $scriptParameters));
+            if (is_object($return)) {
+                return self::getReturnValues($return);
+            }
         }
+        return null;
     }
 
     /**
      * @param $script
      * @param array $parameters
+     * @return array
      */
     function simpleRunScript($script, $parameters = array())
     {
-        $this->doRunScript(array(
+        return $this->doRunScript(array(
             'scriptText'    =>  $script,
             'script_parameters' =>  $parameters
         ));
+    }
+
+    /**
+     * @param \stdClass $obj
+     * @throws Exception\ApiCallException
+     * @return array
+     */
+    public static function getReturnValues(\stdClass $obj)
+    {
+        if ($obj->errorNumber == 0) {
+            return $obj->scriptResult;
+        } else {
+            $code = $obj->errorNumber;
+            $message = $obj->errorString;
+
+            throw new ApiCallException($message, $code);
+        }
     }
 
     /**
@@ -130,6 +157,23 @@ class Client extends \SoapClient {
     {
         return $this->scriptLanguage;
     }
+
+    /**
+     * @return \IndesignClient\Application
+     */
+    public function getApplication()
+    {
+        if (is_object($this->application))
+        {
+            return $this->application;
+        }
+        $this->application = new Application($this);
+        return $this->application;
+    }
+
+
+
+
 
 
 }
