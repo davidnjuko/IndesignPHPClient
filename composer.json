@@ -1,0 +1,29 @@
+{
+    "name": "davidnjuko/indesignClient",
+    "description": "Indesign Server PHP Client",
+    "keywords": ["client"],
+    "homepage": "http://davidribes.fr",
+    "type": "library",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "David Ribes",
+            "homepage": "http://davidribes.fr/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "suggest": {
+
+    },
+    "autoload": {
+        "psr-0": {
+            "IndesignClient": "src/",
+            "IndesignClient\\Test": "test/src/"
+        }
+    }
+}
