@@ -2,7 +2,7 @@
 
 namespace IndesignClient;
 
-class ApplicatiojTest extends \PHPUnit_Framework_TestCase {
+class ApplicationTest extends \PHPUnit_Framework_TestCase {
 
     /** @var  \IndesignClient\Application $instance */
     private $instance;
