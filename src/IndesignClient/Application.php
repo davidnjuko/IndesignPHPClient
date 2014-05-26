@@ -39,8 +39,51 @@ class Application {
         $script = 'app.version';
         $return = $this->client->simpleRunScript($script);
 
-        return $return->data;
+        return (string)$return->data;
     }
 
+    /**
+     * Get the name of the application
+     * @return string
+     */
+    public function  getName()
+    {
+        $script = 'app.name';
+        $return = $this->client->simpleRunScript($script);
+
+        return (string)$return->data;
+    }
+
+    /**
+     * Get user serial number
+     * @return string
+     */
+    public function getSerialNumber()
+    {
+        $script = 'app.serialNumber';
+        $return = $this->client->simpleRunScript($script);
+
+        return (string)$return->data;
+    }
+
+    /**
+     * Get the user associated with the tracked changes and notes.
+     * @return string
+     */
+    public function getUserName()
+    {
+        $script = 'app.userName';
+        $return = $this->client->simpleRunScript($script);
+
+        return (string)$return->data;
+    }
+
+    public function setUserName($userName)
+    {
+        $script = 'app.userName = "'.$userName.'"';
+        $return = $this->client->simpleRunScript($script);
+
+        return ($userName===$return->data);
+    }
 
 }

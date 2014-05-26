@@ -27,4 +27,26 @@ class ApplicatiojTest extends \PHPUnit_Framework_TestCase {
         $this->assertInternalType('string', $version);
         $this->assertGreaterThan(0, strlen($version));
     }
+
+    public function testGetName()
+    {
+        $name = $this->instance->getName();
+        $this->assertInternalType('string', $name);
+        $this->assertGreaterThan(0, strlen($name));
+    }
+
+    public function testGetSerialNumber()
+    {
+        $serial = $this->instance->getSerialNumber();
+        $this->assertInternalType('string', $serial);
+        $this->assertGreaterThan(0, strlen($serial));
+    }
+
+    public function testSetUserName()
+    {
+        $name = "foo".time();
+        $return  = $this->instance->setUserName($name);
+        $this->assertEquals(true, $return);
+        $this->assertEquals($name, $this->instance->getUserName());
+    }
 }
