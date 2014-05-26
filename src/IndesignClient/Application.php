@@ -12,6 +12,10 @@ class Application {
         $this->client = $client;
     }
 
+    /**
+     * Get fonts installed on the server
+     * @return array
+     */
     public function getAllFonts()
     {
         $script = 'app.fonts';
@@ -25,5 +29,18 @@ class Application {
 
         return $fonts;
     }
+
+    /**
+     * Get server version
+     * @return string
+     */
+    public function getVersion()
+    {
+        $script = 'app.version';
+        $return = $this->client->simpleRunScript($script);
+
+        return $return->data;
+    }
+
 
 }

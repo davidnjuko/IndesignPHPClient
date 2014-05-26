@@ -20,4 +20,11 @@ class ApplicatiojTest extends \PHPUnit_Framework_TestCase {
         $this->assertInternalType('array', $fonts);
         $this->assertGreaterThan(0, count($fonts));
     }
+
+    public function testGetVersion()
+    {
+        $version = $this->instance->getVersion();
+        $this->assertInternalType('string', $version);
+        $this->assertGreaterThan(0, strlen($version));
+    }
 }
